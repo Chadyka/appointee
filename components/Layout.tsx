@@ -12,14 +12,14 @@ export function Layout({ session, children }: PropsWithChildren<Props>) {
   return (
     <>
       <Head>
-        <title>Next.js + TypeScript + Supabase + TailwindCSS</title>
+        <title>appointee</title>
       </Head>
       <div className="flex flex-col min-h-screen bg-gray-50">
         <header className="p-4 border-b bg-white flex justify-between">
           <h1>
             <Link href="/">
               <a className="text-red-800 hover:text-red-700 drop-shadow">
-                Next.js + TypeScript + Supabase + TailwindCSS
+                appointee
               </a>
             </Link>
           </h1>

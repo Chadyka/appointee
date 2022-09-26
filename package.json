@@ -1,12 +1,13 @@
 {
-  "name": "nextjs-typescript-supabase-tailwind-starter",
+  "name": "appointee",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "supabase-types": "npx openapi-typescript \"https://vpoxwjoxjdtyeggvvrce.supabase.co/rest/v1/?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwb3h3am94amR0eWVnZ3Z2cmNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjM4ODAzODQsImV4cCI6MTk3OTQ1NjM4NH0.kBq9Pa5Yd23PUpjPu4LF5GFf_SDaEvI7AWtTAtB4tSk\" --version=2 --output types/database/index.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.35.6",
