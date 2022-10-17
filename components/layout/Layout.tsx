@@ -1,11 +1,11 @@
-import { AuthSession } from '@supabase/supabase-js'
-import Head from 'next/head'
-import Link from 'next/link'
-import { PropsWithChildren } from 'react'
-import { Menu } from './Menu'
+import { AuthSession } from "@supabase/supabase-js";
+import Head from "next/head";
+import Link from "next/link";
+import { PropsWithChildren } from "react";
+import { Menu } from "./Menu";
 
 export interface Props {
-  session: AuthSession | null
+  session: AuthSession | null;
 }
 
 export function Layout({ session, children }: PropsWithChildren<Props>) {
@@ -26,10 +26,8 @@ export function Layout({ session, children }: PropsWithChildren<Props>) {
           <Menu session={session} />
         </header>
         <main className="flex-1 p-4">{children}</main>
-        <footer className="bg-sky-700 text-white p-4">
-          Powered by Next.js &amp; Supabase
-        </footer>
+        <footer className="bg-sky-700 text-white p-4"></footer>
       </div>
     </>
-  )
+  );
 }

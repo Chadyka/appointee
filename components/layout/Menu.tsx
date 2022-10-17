@@ -1,13 +1,14 @@
-import { AuthSession } from '@supabase/supabase-js'
-import Link from 'next/link'
-import Router from 'next/router'
-import { supabase } from '../utils/supabaseClient'
+import { AuthSession } from "@supabase/supabase-js";
+import Link from "next/link";
+import Router from "next/router";
+import { supabase } from "../../utils/supabaseClient";
 
 export interface Props {
-  session: AuthSession | null
+  session: AuthSession | null;
 }
 
 export function Menu({ session }: Props) {
+  console.log(session);
   return (
     <ul className="flex space-x-4">
       {session ? (
@@ -21,8 +22,8 @@ export function Menu({ session }: Props) {
             <button
               className="btn-link"
               onClick={() => {
-                supabase.auth.signOut()
-                Router.push('/')
+                supabase.auth.signOut();
+                Router.push("/");
               }}
             >
               Sign out
@@ -39,5 +40,5 @@ export function Menu({ session }: Props) {
         </>
       )}
     </ul>
-  )
+  );
 }

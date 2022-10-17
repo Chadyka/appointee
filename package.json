@@ -10,14 +10,18 @@
     "supabase-types": "npx openapi-typescript \"https://vpoxwjoxjdtyeggvvrce.supabase.co/rest/v1/?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwb3h3am94amR0eWVnZ3Z2cmNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjM4ODAzODQsImV4cCI6MTk3OTQ1NjM4NH0.kBq9Pa5Yd23PUpjPu4LF5GFf_SDaEvI7AWtTAtB4tSk\" --version=2 --output types/database/index.ts"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^1.35.6",
+    "@heroicons/react": "^2.0.12",
+    "@supabase/supabase-js": "^2.0.0",
     "next": "12.2.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-datepicker": "^4.8.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.37.0"
   },
   "devDependencies": {
     "@types/node": "^18.6.4",
     "@types/react": "^18.0.15",
+    "@types/react-datepicker": "^4.4.2",
     "@types/react-dom": "^18.0.6",
     "autoprefixer": "^10.4.8",
     "eslint": "8.21.0",

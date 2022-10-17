@@ -1,23 +1,43 @@
-import { useState } from 'react'
-import { supabase } from '../utils/supabaseClient'
+import { useState } from "react";
+import { supabase } from "../utils/supabaseClient";
 
 export function SigninForm() {
-  const [loading, setLoading] = useState(false)
-  const [email, setEmail] = useState('')
-  const [emailSent, setEmailSent] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailSent, setEmailSent] = useState(false);
 
-  const handleLogin = async (email: string) => {
+  const handleLogin = async (
+    loginProvider: "OTP" | "EMAIL" | "GOOGLE",
+    email: string
+  ) => {
     try {
-      setLoading(true)
-      const { error } = await supabase.auth.signIn({ email })
-      if (error) throw error
-      setEmailSent(true)
+      switch (loginProvider) {
+        case "OTP":
+          const { error } = await supabase.auth.signInWithOtp({ email });
+          if (error) throw error;
+          setEmailSent(true);
+          break;
+        // case "EMAIL":
+        // const { data, error } = await supabase.auth.signUp({
+        //   email: "example@email.com",
+        //   password: "example-password",
+        // });
+        // break;
+        // case "GOOGLE":
+        // const { data, error } = await supabase.auth.signInWithOAuth({
+        //   provider: "google",
+        // });
+        // break;
+        default:
+          break;
+      }
+      setLoading(true);
     } catch (error: any) {
-      console.error(error.error_description || error.message)
+      console.error(error.error_description || error.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div>
@@ -32,41 +52,46 @@ export function SigninForm() {
           </p>
         </div>
       ) : (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            handleLogin(email)
-          }}
-          className="flex flex-col space-y-4"
-        >
-          <p>
-            To sign in or create an account, please enter your email address.
-            You will receive a magic link in your mailbox.
-          </p>
-          <div className="form-group">
-            <label className="label" htmlFor="email">
-              E-mail address
-            </label>
-            <div>
-              <input
-                id="email"
-                className="field"
-                type="email"
-                placeholder="Your email"
-                value={email}
-                required
-                disabled={loading}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+        <div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleLogin("OTP", email);
+            }}
+            className="flex flex-col space-y-4"
+          >
+            <p>
+              To sign in or create an account, please enter your email address.
+              You will receive a magic link in your mailbox.
+            </p>
+            <div className="form-group">
+              <label className="label" htmlFor="email">
+                E-mail address
+              </label>
+              <div>
+                <input
+                  id="email"
+                  className="field"
+                  type="email"
+                  placeholder="Your email"
+                  value={email}
+                  required
+                  disabled={loading}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
             </div>
-          </div>
-          <div>
-            <button type="submit" className="btn" disabled={loading}>
-              <span>{loading ? 'Processing…' : 'Send magic link'}</span>
+            <div>
+              <button type="submit" className="btn" disabled={loading}>
+                <span>{loading ? "Processing…" : "Send magic link"}</span>
+              </button>
+            </div>
+            <button type="button" className="bg-red-600">
+              Google
             </button>
-          </div>
-        </form>
+          </form>
+        </div>
       )}
     </div>
-  )
+  );
 }

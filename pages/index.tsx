@@ -1,8 +1,8 @@
-import { Layout } from '../components/Layout'
-import { useSession } from '../utils/hooks/useSession'
+import { Layout } from "../components/layout/Layout";
+import { useSession } from "../utils/hooks/useSession";
 
 export default function Home() {
-  const session = useSession()
+  const { session } = useSession();
 
-  return <Layout session={session}>Welcome!</Layout>
+  return <Layout session={session}></Layout>;
 }
