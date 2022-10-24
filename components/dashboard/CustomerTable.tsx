@@ -1,9 +1,39 @@
-import { PencilIcon } from '@heroicons/react/24/solid'
 import Link from 'next/link'
-import { Customer } from '../../types/database/types'
-import EditModal from './EditModal'
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid'
+import { TailSpin } from 'react-loader-spinner'
 
-export default function Table({ customers }: { customers: Customer[] }) {
+import { Customer } from '../../types/database/types'
+import { db } from '../../utils/hooks/db'
+import { Dispatch, SetStateAction, useState } from 'react'
+
+export default function CustomerTable({
+  customers,
+  setCustomers,
+}: {
+  customers: Customer[]
+  setCustomers: Dispatch<SetStateAction<Customer[]>>
+}) {
+  const [loading, setLoading] = useState(false)
+
+  const deleteCustomer = async (id: string, addressId: string | undefined) => {
+    try {
+      setLoading(true)
+      const { error } = await db.customers().delete().eq('id', id)
+      if (addressId) {
+        const { error: addressErr } = await db
+          .addresses()
+          .delete()
+          .eq('id', addressId)
+        if (addressErr) throw addressErr
+      }
+      setCustomers(() => customers.filter((customer) => customer.id !== id))
+      if (error) throw error
+    } catch (error) {
+      console.error(error)
+    }
+    setLoading(false)
+  }
+
   return (
     <>
       <div className="relative overflow-x-auto rounded-lg">
@@ -60,13 +90,28 @@ export default function Table({ customers }: { customers: Customer[] }) {
                     })}
                   </div>
                 </td>
-                <td className="py-4 px-6">
-                  <Link href={`/dashboard/customers/${customer.id}`}>
-                    <div className="flex cursor-pointer items-center justify-center gap-x-3 font-medium text-sky-700 hover:text-sky-600 hover:underline">
-                      <PencilIcon className="h-6 w-6" />
-                      <span>Edit</span>
-                    </div>
-                  </Link>
+                <td>
+                  <div className="flex h-full items-center justify-center gap-x-4">
+                    <Link href={`/dashboard/customers/${customer.id}`}>
+                      <PencilIcon className="h-5 w-5 cursor-pointer text-sky-700 hover:text-sky-600" />
+                    </Link>
+                    {!loading && (
+                      <TrashIcon
+                        className="h-5 w-5 cursor-pointer text-red-700 hover:text-red-600"
+                        onClick={() =>
+                          deleteCustomer(customer.id, customer.address_id)
+                        }
+                      />
+                    )}
+                    <TailSpin
+                      height="20"
+                      width="20"
+                      color="#18181b"
+                      ariaLabel="tail-spin-loading"
+                      radius="1"
+                      visible={loading}
+                    />
+                  </div>
                 </td>
               </tr>
             ))}

@@ -1,12 +1,13 @@
+import Link from 'next/link'
+import { Transition } from '@headlessui/react'
 import { Fragment, useEffect, useState } from 'react'
 import { PlusSmallIcon } from '@heroicons/react/24/solid'
+
 import { Customer } from '../../../types/database/types'
 import { db, getPagination } from '../../../utils/hooks/db'
 import { useSession } from '../../../utils/hooks/useSession'
-import Table from '../../../components/dashboard/Table'
+import CustomerTable from '../../../components/dashboard/CustomerTable'
 import DashboardLayout from '../../../components/layout/DashboardLayout'
-import { Transition } from '@headlessui/react'
-import Link from 'next/link'
 
 export default function Customers() {
   const { session } = useSession()
@@ -23,7 +24,8 @@ export default function Customers() {
       const { data, error, count } = await db
         .customers()
         .select('*', { count: 'exact' })
-        .range(from, to)
+        .order('email')
+        .range(from, to - 1)
 
       if (error) throw error
       setCustomers(data)
@@ -86,7 +88,7 @@ export default function Customers() {
               </div>
             </div>
           </div>
-          <Table customers={customers} />
+          <CustomerTable customers={customers} setCustomers={setCustomers} />
         </div>
       </Transition>
     </DashboardLayout>

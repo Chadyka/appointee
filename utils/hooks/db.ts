@@ -20,6 +20,8 @@ export const db = {
   subscriptions: () => supabase.from<Subscription>('subscriptions'),
   // @ts-expect-error
   customers: () => supabase.from<Customers>('customers'),
+  // @ts-expect-error
+  addresses: () => supabase.from<Address>('addresses'),
 }
 
 export const getPagination = (page: number, size: number) => {
