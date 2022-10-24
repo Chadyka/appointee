@@ -2,12 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-.btn {
-  @apply bg-sky-700 hover:bg-sky-600 rounded-md px-4 py-2 text-white cursor-pointer;
+.btn-primary {
+  @apply cursor-pointer rounded-md bg-zinc-800 px-4 py-2 text-zinc-50 hover:bg-zinc-50 hover:text-zinc-800;
+}
+
+.btn-secondary {
+  @apply cursor-pointer rounded-full border-2 border-zinc-50 bg-zinc-50 px-6 py-2 font-semibold text-zinc-800 hover:bg-zinc-800 hover:text-zinc-50;
 }
 
 .btn-link {
-  @apply text-sky-700 hover:text-sky-600 cursor-pointer;
+  @apply cursor-pointer text-sky-700 hover:text-sky-600;
 }
 
 .label {
@@ -15,13 +19,5 @@
 }
 
 .field {
-  @apply border p-2 rounded outline-0 focus:ring-4 ring-sky-100 focus:border-sky-600;
-}
-
-.form-group {
-  @apply flex flex-col space-y-1;
-}
-
-.prose p {
-  @apply mb-2;
+  @apply rounded border p-2 outline-0 ring-sky-100 focus:border-sky-600 focus:ring-4;
 }

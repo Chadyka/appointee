@@ -1,11 +1,11 @@
-import { AuthSession } from "@supabase/supabase-js";
-import Head from "next/head";
-import Link from "next/link";
-import { PropsWithChildren } from "react";
-import { Menu } from "./Menu";
+import { AuthSession } from '@supabase/supabase-js'
+import Head from 'next/head'
+import Link from 'next/link'
+import { PropsWithChildren } from 'react'
+import { Menu } from './Menu'
 
 export interface Props {
-  session: AuthSession | null;
+  session: AuthSession | null
 }
 
 export function Layout({ session, children }: PropsWithChildren<Props>) {
@@ -14,20 +14,18 @@ export function Layout({ session, children }: PropsWithChildren<Props>) {
       <Head>
         <title>appointee</title>
       </Head>
-      <div className="flex flex-col min-h-screen bg-gray-50">
-        <header className="p-4 border-b bg-white flex justify-between">
+      <div className="flex min-h-screen flex-col bg-gray-50">
+        <header className="flex justify-between border-b bg-white p-4">
           <h1>
             <Link href="/">
-              <a className="text-red-800 hover:text-red-700 drop-shadow">
-                appointee
-              </a>
+              <a className="text-xl font-black text-zinc-800">appointee</a>
             </Link>
           </h1>
           <Menu session={session} />
         </header>
         <main className="flex-1 p-4">{children}</main>
-        <footer className="bg-sky-700 text-white p-4"></footer>
+        <footer className="bg-sky-700 p-4 text-white"></footer>
       </div>
     </>
-  );
+  )
 }

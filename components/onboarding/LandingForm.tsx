@@ -1,54 +1,55 @@
-import { UseFormRegister } from "react-hook-form";
-import DatePicker from "react-datepicker";
-import { OnboardingFormValues } from "../../types/Onboarding";
-import { useState } from "react";
-import { getDate, getMonth, differenceInCalendarDays } from "date-fns";
+import { UseFormRegister } from 'react-hook-form'
+import DatePicker from 'react-datepicker'
+import { OnboardingFormValues } from '../../types/Onboarding'
+import { useState } from 'react'
+import { getDate, getMonth, differenceInCalendarDays } from 'date-fns'
 
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css'
 
 export default function LandingForm({
   register,
 }: {
-  register: UseFormRegister<OnboardingFormValues>;
+  register: UseFormRegister<OnboardingFormValues>
 }) {
-  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [startDate, setStartDate] = useState<Date>(new Date())
 
   const onChange = (date: Date) => {
-    setStartDate(date);
-  };
+    setStartDate(date)
+  }
 
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
 
   const renderDayContents = (day, date) => {
-    const tooltipText = `Tooltip for date: ${date}`;
-    console.log(getDate(date), getDate(startDate));
+    const tooltipText = `Tooltip for date: ${date}`
+    console.log(getDate(date), getDate(startDate))
     return (
-      <div className="bg-white w-full h-full">
+      <div className="h-full w-full bg-white">
         <div
           className={`${
             differenceInCalendarDays(date, startDate) === 0 &&
-            "bg-red-500 w-full h-full rounded-lg"
+            'h-full w-full rounded-lg bg-red-500'
           }`}
           title={tooltipText}
         >
           {getDate(date)}
         </div>
       </div>
-    );
-  };
+    )
+  }
+  // postgresql://postgres:19mTiS5jVQXxEyNw@db.hqxsdwibkuhcsmzfgwnm.supabase.co:5432/postgres
 
   return (
     <DatePicker
@@ -66,7 +67,7 @@ export default function LandingForm({
       }) => (
         <div className="m-3 flex justify-between">
           <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
-            {"<"}
+            {'<'}
           </button>
 
           <select
@@ -83,12 +84,12 @@ export default function LandingForm({
           </select>
 
           <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
-            {">"}
+            {'>'}
           </button>
         </div>
       )}
     />
-  );
+  )
 }
 // return (
 //   <>

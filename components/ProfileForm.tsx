@@ -1,5 +1,6 @@
 import { AuthSession } from '@supabase/supabase-js'
 import { useState, useEffect } from 'react'
+import { db } from '../utils/hooks/db'
 import { useProfile } from '../utils/hooks/useProfile'
 import { supabase } from '../utils/supabaseClient'
 import { EditAvatar } from './EditAvatar'
@@ -34,22 +35,24 @@ export function ProfileForm({ session }: Props) {
   }) {
     try {
       setUpdating(true)
-      const user = supabase.auth.user()!
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
 
-      const updates = {
-        id: user.id,
-        username,
-        website,
-        avatar_url,
-        updated_at: new Date(),
-      }
+      if (user) {
+        const updates = {
+          id: user.id,
+          username,
+          website,
+          avatar_url,
+          updated_at: new Date(),
+        }
 
-      const { error } = await supabase.from('profiles').upsert(updates, {
-        returning: 'minimal', // Don't return the value after inserting
-      })
+        const { error } = await supabase.from('profiles').upsert(updates)
 
-      if (error) {
-        throw error
+        if (error) {
+          throw error
+        }
       }
     } catch (error: any) {
       alert(error.message)

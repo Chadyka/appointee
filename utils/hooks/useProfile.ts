@@ -1,49 +1,54 @@
-import { AuthSession } from "@supabase/supabase-js";
-import { useEffect, useState } from "react";
-import { definitions } from "../../types/database/index";
-import { supabase } from "../supabaseClient";
+import { AuthSession } from '@supabase/supabase-js'
+import { useEffect, useState } from 'react'
+import { definitions } from '../../types/database/index'
+import { supabase } from '../supabaseClient'
+import { db } from './db'
 
 export interface Profile {
-  username: string;
-  website: string;
-  avatarUrl: string;
+  username: string
+  website: string
+  avatarUrl: string
 }
 
 export function useProfile(session: AuthSession) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<any | null>(null);
-  const [profile, setProfile] = useState<Profile | null>(null);
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<any | null>(null)
+  const [profile, setProfile] = useState<Profile | null>(null)
 
   useEffect(() => {
-    (async function () {
+    ;(async function () {
       try {
-        setLoading(true);
-        const user = supabase.auth.user()!;
+        setLoading(true)
+        const {
+          data: { user },
+        } = await supabase.auth.getUser()
 
-        const { data, error, status } = await supabase
-          .from<definitions["profiles"]>("profiles")
-          .select(`username, website, avatar_url`)
-          .eq("id", user.id)
-          .single();
+        if (user) {
+          const { data, error, status } = await db
+            .profiles()
+            .select(`username, website, avatar_url`)
+            .eq('id', user.id)
+            .single()
 
-        if (error && status !== 406) {
-          throw error;
-        }
+          if (error && status !== 406) {
+            throw error
+          }
 
-        if (data) {
-          setProfile({
-            username: data.username ?? "",
-            website: data.website ?? "",
-            avatarUrl: data.avatar_url ?? "",
-          });
+          if (data) {
+            setProfile({
+              username: data.username ?? '',
+              website: data.website ?? '',
+              avatarUrl: data.avatar_url ?? '',
+            })
+          }
         }
       } catch (error: any) {
-        setError(error);
+        setError(error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    })();
-  }, [session]);
+    })()
+  }, [session])
 
-  return { loading, error, profile };
+  return { loading, error, profile }
 }

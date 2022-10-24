@@ -7,25 +7,25 @@ export interface Props {
   session: AuthSession | null
 }
 
-export function Menu({ session }: Props) {
+export function Navbar({ session }: Props) {
   return (
-    <ul className="flex space-x-4">
+    <ul className="flex items-center justify-center space-x-6">
       {session ? (
         <>
           <li>
             <Link href="/profile">
-              <a className="btn-link">My profile</a>
+              <a className="btn-secondary">My profile</a>
             </Link>
           </li>
           <li>
             <button
-              className="btn-link"
+              className="text-zinc-50 underline underline-offset-4"
               onClick={() => {
                 supabase.auth.signOut()
                 Router.push('/')
               }}
             >
-              Sign out
+              Logout
             </button>
           </li>
         </>

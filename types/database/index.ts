@@ -135,9 +135,6 @@ export interface paths {
           updated_at?: parameters["rowFilter.services.updated_at"];
           name?: parameters["rowFilter.services.name"];
           price?: parameters["rowFilter.services.price"];
-          discount?: parameters["rowFilter.services.discount"];
-          discount_amount?: parameters["rowFilter.services.discount_amount"];
-          organization_id?: parameters["rowFilter.services.organization_id"];
           provider_id?: parameters["rowFilter.services.provider_id"];
           /** Filtering Columns */
           select?: parameters["select"];
@@ -194,9 +191,6 @@ export interface paths {
           updated_at?: parameters["rowFilter.services.updated_at"];
           name?: parameters["rowFilter.services.name"];
           price?: parameters["rowFilter.services.price"];
-          discount?: parameters["rowFilter.services.discount"];
-          discount_amount?: parameters["rowFilter.services.discount_amount"];
-          organization_id?: parameters["rowFilter.services.organization_id"];
           provider_id?: parameters["rowFilter.services.provider_id"];
         };
         header: {
@@ -217,9 +211,6 @@ export interface paths {
           updated_at?: parameters["rowFilter.services.updated_at"];
           name?: parameters["rowFilter.services.name"];
           price?: parameters["rowFilter.services.price"];
-          discount?: parameters["rowFilter.services.discount"];
-          discount_amount?: parameters["rowFilter.services.discount_amount"];
-          organization_id?: parameters["rowFilter.services.organization_id"];
           provider_id?: parameters["rowFilter.services.provider_id"];
         };
         body: {
@@ -473,12 +464,13 @@ export interface paths {
           created_at?: parameters["rowFilter.organizations.created_at"];
           updated_at?: parameters["rowFilter.organizations.updated_at"];
           name?: parameters["rowFilter.organizations.name"];
-          legal_name?: parameters["rowFilter.organizations.legal_name"];
+          billing_country?: parameters["rowFilter.organizations.billing_country"];
+          billing_county?: parameters["rowFilter.organizations.billing_county"];
+          billing_city?: parameters["rowFilter.organizations.billing_city"];
           billing_address?: parameters["rowFilter.organizations.billing_address"];
-          email?: parameters["rowFilter.organizations.email"];
-          phone?: parameters["rowFilter.organizations.phone"];
-          contact_id?: parameters["rowFilter.organizations.contact_id"];
-          avatar_url?: parameters["rowFilter.organizations.avatar_url"];
+          billing_zip?: parameters["rowFilter.organizations.billing_zip"];
+          service_id?: parameters["rowFilter.organizations.service_id"];
+          org_slug?: parameters["rowFilter.organizations.org_slug"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -533,12 +525,13 @@ export interface paths {
           created_at?: parameters["rowFilter.organizations.created_at"];
           updated_at?: parameters["rowFilter.organizations.updated_at"];
           name?: parameters["rowFilter.organizations.name"];
-          legal_name?: parameters["rowFilter.organizations.legal_name"];
+          billing_country?: parameters["rowFilter.organizations.billing_country"];
+          billing_county?: parameters["rowFilter.organizations.billing_county"];
+          billing_city?: parameters["rowFilter.organizations.billing_city"];
           billing_address?: parameters["rowFilter.organizations.billing_address"];
-          email?: parameters["rowFilter.organizations.email"];
-          phone?: parameters["rowFilter.organizations.phone"];
-          contact_id?: parameters["rowFilter.organizations.contact_id"];
-          avatar_url?: parameters["rowFilter.organizations.avatar_url"];
+          billing_zip?: parameters["rowFilter.organizations.billing_zip"];
+          service_id?: parameters["rowFilter.organizations.service_id"];
+          org_slug?: parameters["rowFilter.organizations.org_slug"];
         };
         header: {
           /** Preference */
@@ -557,16 +550,227 @@ export interface paths {
           created_at?: parameters["rowFilter.organizations.created_at"];
           updated_at?: parameters["rowFilter.organizations.updated_at"];
           name?: parameters["rowFilter.organizations.name"];
-          legal_name?: parameters["rowFilter.organizations.legal_name"];
+          billing_country?: parameters["rowFilter.organizations.billing_country"];
+          billing_county?: parameters["rowFilter.organizations.billing_county"];
+          billing_city?: parameters["rowFilter.organizations.billing_city"];
           billing_address?: parameters["rowFilter.organizations.billing_address"];
-          email?: parameters["rowFilter.organizations.email"];
-          phone?: parameters["rowFilter.organizations.phone"];
-          contact_id?: parameters["rowFilter.organizations.contact_id"];
-          avatar_url?: parameters["rowFilter.organizations.avatar_url"];
+          billing_zip?: parameters["rowFilter.organizations.billing_zip"];
+          service_id?: parameters["rowFilter.organizations.service_id"];
+          org_slug?: parameters["rowFilter.organizations.org_slug"];
         };
         body: {
           /** organizations */
           organizations?: definitions["organizations"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/customers": {
+    get: {
+      parameters: {
+        query: {
+          first_name?: parameters["rowFilter.customers.first_name"];
+          last_name?: parameters["rowFilter.customers.last_name"];
+          email?: parameters["rowFilter.customers.email"];
+          phone?: parameters["rowFilter.customers.phone"];
+          country_code?: parameters["rowFilter.customers.country_code"];
+          id?: parameters["rowFilter.customers.id"];
+          created_at?: parameters["rowFilter.customers.created_at"];
+          address_id?: parameters["rowFilter.customers.address_id"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["customers"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** customers */
+          customers?: definitions["customers"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          first_name?: parameters["rowFilter.customers.first_name"];
+          last_name?: parameters["rowFilter.customers.last_name"];
+          email?: parameters["rowFilter.customers.email"];
+          phone?: parameters["rowFilter.customers.phone"];
+          country_code?: parameters["rowFilter.customers.country_code"];
+          id?: parameters["rowFilter.customers.id"];
+          created_at?: parameters["rowFilter.customers.created_at"];
+          address_id?: parameters["rowFilter.customers.address_id"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          first_name?: parameters["rowFilter.customers.first_name"];
+          last_name?: parameters["rowFilter.customers.last_name"];
+          email?: parameters["rowFilter.customers.email"];
+          phone?: parameters["rowFilter.customers.phone"];
+          country_code?: parameters["rowFilter.customers.country_code"];
+          id?: parameters["rowFilter.customers.id"];
+          created_at?: parameters["rowFilter.customers.created_at"];
+          address_id?: parameters["rowFilter.customers.address_id"];
+        };
+        body: {
+          /** customers */
+          customers?: definitions["customers"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/addresses": {
+    get: {
+      parameters: {
+        query: {
+          Country?: parameters["rowFilter.addresses.Country"];
+          Zip?: parameters["rowFilter.addresses.Zip"];
+          City?: parameters["rowFilter.addresses.City"];
+          Address?: parameters["rowFilter.addresses.Address"];
+          id?: parameters["rowFilter.addresses.id"];
+          created_at?: parameters["rowFilter.addresses.created_at"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["addresses"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** addresses */
+          addresses?: definitions["addresses"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          Country?: parameters["rowFilter.addresses.Country"];
+          Zip?: parameters["rowFilter.addresses.Zip"];
+          City?: parameters["rowFilter.addresses.City"];
+          Address?: parameters["rowFilter.addresses.Address"];
+          id?: parameters["rowFilter.addresses.id"];
+          created_at?: parameters["rowFilter.addresses.created_at"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          Country?: parameters["rowFilter.addresses.Country"];
+          Zip?: parameters["rowFilter.addresses.Zip"];
+          City?: parameters["rowFilter.addresses.City"];
+          Address?: parameters["rowFilter.addresses.Address"];
+          id?: parameters["rowFilter.addresses.id"];
+          created_at?: parameters["rowFilter.addresses.created_at"];
+        };
+        body: {
+          /** addresses */
+          addresses?: definitions["addresses"];
         };
         header: {
           /** Preference */
@@ -623,6 +827,7 @@ export interface definitions {
      * Format: uuid
      * @description Note:
      * This is a Primary Key.<pk/>
+     * @default extensions.uuid_generate_v4()
      */
     id: string;
     /**
@@ -639,16 +844,6 @@ export interface definitions {
     name?: string;
     /** Format: real */
     price?: number;
-    /** Format: text */
-    discount?: string;
-    /** Format: real */
-    discount_amount?: number;
-    /**
-     * Format: uuid
-     * @description Note:
-     * This is a Foreign Key to `organizations.id`.<fk table='organizations' column='id'/>
-     */
-    organization_id?: string;
     /**
      * Format: uuid
      * @description Note:
@@ -661,6 +856,7 @@ export interface definitions {
      * Format: uuid
      * @description Note:
      * This is a Primary Key.<pk/>
+     * @default extensions.uuid_generate_v4()
      */
     id: string;
     /** Format: timestamp with time zone */
@@ -695,6 +891,7 @@ export interface definitions {
      * Format: uuid
      * @description Note:
      * This is a Primary Key.<pk/>
+     * @default extensions.uuid_generate_v4()
      */
     id: string;
     /** Format: timestamp with time zone */
@@ -721,6 +918,7 @@ export interface definitions {
      * Format: uuid
      * @description Note:
      * This is a Primary Key.<pk/>
+     * @default extensions.uuid_generate_v4()
      */
     id: string;
     /**
@@ -736,21 +934,75 @@ export interface definitions {
     /** Format: text */
     name?: string;
     /** Format: text */
-    legal_name?: string;
+    billing_country?: string;
+    /** Format: text */
+    billing_county?: string;
+    /** Format: text */
+    billing_city?: string;
     /** Format: text */
     billing_address?: string;
+    /** Format: text */
+    billing_zip?: string;
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `services.id`.<fk table='services' column='id'/>
+     */
+    service_id?: string;
+    /** Format: text */
+    org_slug?: string;
+  };
+  customers: {
+    /** Format: text */
+    first_name?: string;
+    /** Format: text */
+    last_name?: string;
     /** Format: text */
     email?: string;
     /** Format: text */
     phone?: string;
+    /** Format: text */
+    country_code?: string;
     /**
      * Format: uuid
      * @description Note:
-     * This is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>
+     * This is a Primary Key.<pk/>
+     * @default extensions.uuid_generate_v4()
      */
-    contact_id?: string;
+    id: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `addresses.id`.<fk table='addresses' column='id'/>
+     */
+    address_id?: string;
+  };
+  addresses: {
     /** Format: text */
-    avatar_url?: string;
+    Country?: string;
+    /** Format: bigint */
+    Zip?: number;
+    /** Format: text */
+    City?: string;
+    /** Format: text */
+    Address?: string;
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     * @default extensions.uuid_generate_v4()
+     */
+    id: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
   };
 }
 
@@ -821,12 +1073,6 @@ export interface parameters {
   "rowFilter.services.name": string;
   /** Format: real */
   "rowFilter.services.price": string;
-  /** Format: text */
-  "rowFilter.services.discount": string;
-  /** Format: real */
-  "rowFilter.services.discount_amount": string;
-  /** Format: uuid */
-  "rowFilter.services.organization_id": string;
   /** Format: uuid */
   "rowFilter.services.provider_id": string;
   /** @description providers */
@@ -884,17 +1130,51 @@ export interface parameters {
   /** Format: text */
   "rowFilter.organizations.name": string;
   /** Format: text */
-  "rowFilter.organizations.legal_name": string;
+  "rowFilter.organizations.billing_country": string;
+  /** Format: text */
+  "rowFilter.organizations.billing_county": string;
+  /** Format: text */
+  "rowFilter.organizations.billing_city": string;
   /** Format: text */
   "rowFilter.organizations.billing_address": string;
   /** Format: text */
-  "rowFilter.organizations.email": string;
-  /** Format: text */
-  "rowFilter.organizations.phone": string;
+  "rowFilter.organizations.billing_zip": string;
   /** Format: uuid */
-  "rowFilter.organizations.contact_id": string;
+  "rowFilter.organizations.service_id": string;
   /** Format: text */
-  "rowFilter.organizations.avatar_url": string;
+  "rowFilter.organizations.org_slug": string;
+  /** @description customers */
+  "body.customers": definitions["customers"];
+  /** Format: text */
+  "rowFilter.customers.first_name": string;
+  /** Format: text */
+  "rowFilter.customers.last_name": string;
+  /** Format: text */
+  "rowFilter.customers.email": string;
+  /** Format: text */
+  "rowFilter.customers.phone": string;
+  /** Format: text */
+  "rowFilter.customers.country_code": string;
+  /** Format: uuid */
+  "rowFilter.customers.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.customers.created_at": string;
+  /** Format: uuid */
+  "rowFilter.customers.address_id": string;
+  /** @description addresses */
+  "body.addresses": definitions["addresses"];
+  /** Format: text */
+  "rowFilter.addresses.Country": string;
+  /** Format: bigint */
+  "rowFilter.addresses.Zip": string;
+  /** Format: text */
+  "rowFilter.addresses.City": string;
+  /** Format: text */
+  "rowFilter.addresses.Address": string;
+  /** Format: uuid */
+  "rowFilter.addresses.id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.addresses.created_at": string;
 }
 
 export interface operations {}
