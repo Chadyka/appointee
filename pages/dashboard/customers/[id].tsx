@@ -10,41 +10,6 @@ import { useSession } from '../../../utils/hooks/useSession'
 import DashboardLayout from '../../../components/layout/DashboardLayout'
 import { useRouter } from 'next/router'
 
-interface UpdateCustomerInput {
-  first_name?: string
-  last_name?: string
-  email?: string
-  phone?: string
-  country_code?: string
-  country?: string
-  zip?: number
-  city?: string
-  street_address?: string
-}
-
-const updateCustomerSchema = z.object({
-  first_name: z.string().regex(/[A-Za-zÀ-ÿ]/, {
-    message: 'Not a valid firstname',
-  }),
-  last_name: z.string().regex(/[A-Za-zÀ-ÿ]/, {
-    message: 'Not a valid lastname',
-  }),
-  email: z.string().email({ message: 'Not a valid email' }),
-  phone: z
-    .string()
-    .regex(
-      /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
-      { message: 'Not a valid phone number' }
-    ),
-  country_code: z.string().length(2, { message: 'Must be only 2 characters' }),
-  country: z.string(),
-  zip: z.number().positive(),
-  city: z.string(),
-  street_address: z.string(),
-})
-
-const customerPartial = updateCustomerSchema.partial()
-
 export default function AddCustomer() {
   const { session } = useSession()
   const {
@@ -62,12 +27,12 @@ export default function AddCustomer() {
   const router = useRouter()
 
   const updateCustomer = async (data: UpdateCustomerInput) => {
-    console.log(data)
     try {
       setLoading(true)
       const { error } = await db
         .customers()
         .update({
+          full_name: `${data.last_name} ${data.first_name}`,
           first_name: data.first_name,
           last_name: data.last_name,
           email: data.email,
@@ -287,7 +252,7 @@ export default function AddCustomer() {
                   className={`block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900 shadow-sm focus:border-sky-600 focus:ring-sky-600 sm:text-sm ${
                     errors.zip ? 'border-red-500' : 'border-gray-300'
                   }`}
-                  {...register('zip')}
+                  {...register('zip', { valueAsNumber: true })}
                 />
                 {errors.zip && (
                   <p className="pt-2 text-red-500">*{errors.zip?.message}</p>
@@ -354,3 +319,38 @@ export default function AddCustomer() {
     </DashboardLayout>
   )
 }
+
+interface UpdateCustomerInput {
+  first_name?: string
+  last_name?: string
+  email?: string
+  phone?: string
+  country_code?: string
+  country?: string
+  zip?: number
+  city?: string
+  street_address?: string
+}
+
+const updateCustomerSchema = z.object({
+  first_name: z.string().regex(/[A-Za-zÀ-ÿ]/, {
+    message: 'Not a valid firstname',
+  }),
+  last_name: z.string().regex(/[A-Za-zÀ-ÿ]/, {
+    message: 'Not a valid lastname',
+  }),
+  email: z.string().email({ message: 'Not a valid email' }),
+  phone: z
+    .string()
+    .regex(
+      /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
+      { message: 'Not a valid phone number' }
+    ),
+  country_code: z.string().length(2, { message: 'Must be only 2 characters' }),
+  country: z.string(),
+  zip: z.number().positive(),
+  city: z.string(),
+  street_address: z.string(),
+})
+
+const customerPartial = updateCustomerSchema.partial()

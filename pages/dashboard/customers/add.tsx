@@ -9,35 +9,6 @@ import { db } from '../../../utils/hooks/db'
 import { useSession } from '../../../utils/hooks/useSession'
 import DashboardLayout from '../../../components/layout/DashboardLayout'
 
-interface AddCustomerInput {
-  first_name: string
-  last_name: string
-  email: string
-  phone: string
-  country_code: string
-}
-
-const addCustomerSchema = z
-  .object({
-    first_name: z.string().regex(/[A-Za-zÀ-ÿ]/, {
-      message: 'Not a valid firstname',
-    }),
-    last_name: z.string().regex(/[A-Za-zÀ-ÿ]/, {
-      message: 'Not a valid lastname',
-    }),
-    email: z.string().email({ message: 'Not a valid email' }),
-    phone: z
-      .string()
-      .regex(
-        /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
-        { message: 'Not a valid phone number' }
-      ),
-    country_code: z
-      .string()
-      .length(2, { message: 'Must be only 2 characters' }),
-  })
-  .required()
-
 export default function AddCustomer() {
   const { session } = useSession()
   const {
@@ -48,10 +19,12 @@ export default function AddCustomer() {
 
   const [loading, setLoading] = useState(false)
 
-  const updateCustomer = async (data: AddCustomerInput) => {
+  async function updateCustomer(data: AddCustomerInput) {
     try {
       setLoading(true)
-      const { error } = await db.customers().insert(data)
+      const { error } = await db
+        .customers()
+        .insert({ ...data, full_name: `${data.last_name} ${data.first_name}` })
 
       if (error) throw error
     } catch (error) {
@@ -208,3 +181,32 @@ export default function AddCustomer() {
     </DashboardLayout>
   )
 }
+
+interface AddCustomerInput {
+  first_name: string
+  last_name: string
+  email: string
+  phone: string
+  country_code: string
+}
+
+const addCustomerSchema = z
+  .object({
+    first_name: z.string().regex(/[A-Za-zÀ-ÿ]/, {
+      message: 'Not a valid firstname',
+    }),
+    last_name: z.string().regex(/[A-Za-zÀ-ÿ]/, {
+      message: 'Not a valid lastname',
+    }),
+    email: z.string().email({ message: 'Not a valid email' }),
+    phone: z
+      .string()
+      .regex(
+        /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
+        { message: 'Not a valid phone number' }
+      ),
+    country_code: z
+      .string()
+      .length(2, { message: 'Must be only 2 characters' }),
+  })
+  .required()

@@ -12,20 +12,20 @@ export interface paths {
       };
     };
   };
-  "/subscriptions": {
+  "/bookings": {
     get: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.subscriptions.id"];
-          created_at?: parameters["rowFilter.subscriptions.created_at"];
-          updated_at?: parameters["rowFilter.subscriptions.updated_at"];
-          paid_at?: parameters["rowFilter.subscriptions.paid_at"];
-          reference?: parameters["rowFilter.subscriptions.reference"];
-          type?: parameters["rowFilter.subscriptions.type"];
-          price?: parameters["rowFilter.subscriptions.price"];
-          discount?: parameters["rowFilter.subscriptions.discount"];
-          discount_amount?: parameters["rowFilter.subscriptions.discount_amount"];
-          organization_id?: parameters["rowFilter.subscriptions.organization_id"];
+          id?: parameters["rowFilter.bookings.id"];
+          created_at?: parameters["rowFilter.bookings.created_at"];
+          updated_at?: parameters["rowFilter.bookings.updated_at"];
+          starts_at?: parameters["rowFilter.bookings.starts_at"];
+          ends_at?: parameters["rowFilter.bookings.ends_at"];
+          price?: parameters["rowFilter.bookings.price"];
+          service_id?: parameters["rowFilter.bookings.service_id"];
+          customer_id?: parameters["rowFilter.bookings.customer_id"];
+          "buffer_starts_at	"?: parameters["rowFilter.bookings.buffer_starts_at	"];
+          buffer_ends_at?: parameters["rowFilter.bookings.buffer_ends_at"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -47,7 +47,7 @@ export interface paths {
       responses: {
         /** OK */
         200: {
-          schema: definitions["subscriptions"][];
+          schema: definitions["bookings"][];
         };
         /** Partial Content */
         206: unknown;
@@ -56,8 +56,8 @@ export interface paths {
     post: {
       parameters: {
         body: {
-          /** subscriptions */
-          subscriptions?: definitions["subscriptions"];
+          /** bookings */
+          bookings?: definitions["bookings"];
         };
         query: {
           /** Filtering Columns */
@@ -76,16 +76,16 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.subscriptions.id"];
-          created_at?: parameters["rowFilter.subscriptions.created_at"];
-          updated_at?: parameters["rowFilter.subscriptions.updated_at"];
-          paid_at?: parameters["rowFilter.subscriptions.paid_at"];
-          reference?: parameters["rowFilter.subscriptions.reference"];
-          type?: parameters["rowFilter.subscriptions.type"];
-          price?: parameters["rowFilter.subscriptions.price"];
-          discount?: parameters["rowFilter.subscriptions.discount"];
-          discount_amount?: parameters["rowFilter.subscriptions.discount_amount"];
-          organization_id?: parameters["rowFilter.subscriptions.organization_id"];
+          id?: parameters["rowFilter.bookings.id"];
+          created_at?: parameters["rowFilter.bookings.created_at"];
+          updated_at?: parameters["rowFilter.bookings.updated_at"];
+          starts_at?: parameters["rowFilter.bookings.starts_at"];
+          ends_at?: parameters["rowFilter.bookings.ends_at"];
+          price?: parameters["rowFilter.bookings.price"];
+          service_id?: parameters["rowFilter.bookings.service_id"];
+          customer_id?: parameters["rowFilter.bookings.customer_id"];
+          "buffer_starts_at	"?: parameters["rowFilter.bookings.buffer_starts_at	"];
+          buffer_ends_at?: parameters["rowFilter.bookings.buffer_ends_at"];
         };
         header: {
           /** Preference */
@@ -100,20 +100,20 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          id?: parameters["rowFilter.subscriptions.id"];
-          created_at?: parameters["rowFilter.subscriptions.created_at"];
-          updated_at?: parameters["rowFilter.subscriptions.updated_at"];
-          paid_at?: parameters["rowFilter.subscriptions.paid_at"];
-          reference?: parameters["rowFilter.subscriptions.reference"];
-          type?: parameters["rowFilter.subscriptions.type"];
-          price?: parameters["rowFilter.subscriptions.price"];
-          discount?: parameters["rowFilter.subscriptions.discount"];
-          discount_amount?: parameters["rowFilter.subscriptions.discount_amount"];
-          organization_id?: parameters["rowFilter.subscriptions.organization_id"];
+          id?: parameters["rowFilter.bookings.id"];
+          created_at?: parameters["rowFilter.bookings.created_at"];
+          updated_at?: parameters["rowFilter.bookings.updated_at"];
+          starts_at?: parameters["rowFilter.bookings.starts_at"];
+          ends_at?: parameters["rowFilter.bookings.ends_at"];
+          price?: parameters["rowFilter.bookings.price"];
+          service_id?: parameters["rowFilter.bookings.service_id"];
+          customer_id?: parameters["rowFilter.bookings.customer_id"];
+          "buffer_starts_at	"?: parameters["rowFilter.bookings.buffer_starts_at	"];
+          buffer_ends_at?: parameters["rowFilter.bookings.buffer_ends_at"];
         };
         body: {
-          /** subscriptions */
-          subscriptions?: definitions["subscriptions"];
+          /** bookings */
+          bookings?: definitions["bookings"];
         };
         header: {
           /** Preference */
@@ -133,7 +133,9 @@ export interface paths {
           id?: parameters["rowFilter.services.id"];
           created_at?: parameters["rowFilter.services.created_at"];
           updated_at?: parameters["rowFilter.services.updated_at"];
-          name?: parameters["rowFilter.services.name"];
+          slug?: parameters["rowFilter.services.slug"];
+          title?: parameters["rowFilter.services.title"];
+          duration?: parameters["rowFilter.services.duration"];
           price?: parameters["rowFilter.services.price"];
           provider_id?: parameters["rowFilter.services.provider_id"];
           /** Filtering Columns */
@@ -189,7 +191,9 @@ export interface paths {
           id?: parameters["rowFilter.services.id"];
           created_at?: parameters["rowFilter.services.created_at"];
           updated_at?: parameters["rowFilter.services.updated_at"];
-          name?: parameters["rowFilter.services.name"];
+          slug?: parameters["rowFilter.services.slug"];
+          title?: parameters["rowFilter.services.title"];
+          duration?: parameters["rowFilter.services.duration"];
           price?: parameters["rowFilter.services.price"];
           provider_id?: parameters["rowFilter.services.provider_id"];
         };
@@ -209,7 +213,9 @@ export interface paths {
           id?: parameters["rowFilter.services.id"];
           created_at?: parameters["rowFilter.services.created_at"];
           updated_at?: parameters["rowFilter.services.updated_at"];
-          name?: parameters["rowFilter.services.name"];
+          slug?: parameters["rowFilter.services.slug"];
+          title?: parameters["rowFilter.services.title"];
+          duration?: parameters["rowFilter.services.duration"];
           price?: parameters["rowFilter.services.price"];
           provider_id?: parameters["rowFilter.services.provider_id"];
         };
@@ -233,15 +239,14 @@ export interface paths {
       parameters: {
         query: {
           id?: parameters["rowFilter.providers.id"];
+          created_at?: parameters["rowFilter.providers.created_at"];
           updated_at?: parameters["rowFilter.providers.updated_at"];
-          avatar_url?: parameters["rowFilter.providers.avatar_url"];
+          full_name?: parameters["rowFilter.providers.full_name"];
           first_name?: parameters["rowFilter.providers.first_name"];
           last_name?: parameters["rowFilter.providers.last_name"];
-          full_name?: parameters["rowFilter.providers.full_name"];
-          email?: parameters["rowFilter.providers.email"];
           phone?: parameters["rowFilter.providers.phone"];
-          organization_id?: parameters["rowFilter.providers.organization_id"];
-          service_id?: parameters["rowFilter.providers.service_id"];
+          email?: parameters["rowFilter.providers.email"];
+          avatar_url?: parameters["rowFilter.providers.avatar_url"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -293,15 +298,14 @@ export interface paths {
       parameters: {
         query: {
           id?: parameters["rowFilter.providers.id"];
+          created_at?: parameters["rowFilter.providers.created_at"];
           updated_at?: parameters["rowFilter.providers.updated_at"];
-          avatar_url?: parameters["rowFilter.providers.avatar_url"];
+          full_name?: parameters["rowFilter.providers.full_name"];
           first_name?: parameters["rowFilter.providers.first_name"];
           last_name?: parameters["rowFilter.providers.last_name"];
-          full_name?: parameters["rowFilter.providers.full_name"];
-          email?: parameters["rowFilter.providers.email"];
           phone?: parameters["rowFilter.providers.phone"];
-          organization_id?: parameters["rowFilter.providers.organization_id"];
-          service_id?: parameters["rowFilter.providers.service_id"];
+          email?: parameters["rowFilter.providers.email"];
+          avatar_url?: parameters["rowFilter.providers.avatar_url"];
         };
         header: {
           /** Preference */
@@ -317,15 +321,14 @@ export interface paths {
       parameters: {
         query: {
           id?: parameters["rowFilter.providers.id"];
+          created_at?: parameters["rowFilter.providers.created_at"];
           updated_at?: parameters["rowFilter.providers.updated_at"];
-          avatar_url?: parameters["rowFilter.providers.avatar_url"];
+          full_name?: parameters["rowFilter.providers.full_name"];
           first_name?: parameters["rowFilter.providers.first_name"];
           last_name?: parameters["rowFilter.providers.last_name"];
-          full_name?: parameters["rowFilter.providers.full_name"];
-          email?: parameters["rowFilter.providers.email"];
           phone?: parameters["rowFilter.providers.phone"];
-          organization_id?: parameters["rowFilter.providers.organization_id"];
-          service_id?: parameters["rowFilter.providers.service_id"];
+          email?: parameters["rowFilter.providers.email"];
+          avatar_url?: parameters["rowFilter.providers.avatar_url"];
         };
         body: {
           /** providers */
@@ -456,123 +459,6 @@ export interface paths {
       };
     };
   };
-  "/organizations": {
-    get: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.organizations.id"];
-          created_at?: parameters["rowFilter.organizations.created_at"];
-          updated_at?: parameters["rowFilter.organizations.updated_at"];
-          name?: parameters["rowFilter.organizations.name"];
-          billing_country?: parameters["rowFilter.organizations.billing_country"];
-          billing_county?: parameters["rowFilter.organizations.billing_county"];
-          billing_city?: parameters["rowFilter.organizations.billing_city"];
-          billing_address?: parameters["rowFilter.organizations.billing_address"];
-          billing_zip?: parameters["rowFilter.organizations.billing_zip"];
-          service_id?: parameters["rowFilter.organizations.service_id"];
-          org_slug?: parameters["rowFilter.organizations.org_slug"];
-          /** Filtering Columns */
-          select?: parameters["select"];
-          /** Ordering */
-          order?: parameters["order"];
-          /** Limiting and Pagination */
-          offset?: parameters["offset"];
-          /** Limiting and Pagination */
-          limit?: parameters["limit"];
-        };
-        header: {
-          /** Limiting and Pagination */
-          Range?: parameters["range"];
-          /** Limiting and Pagination */
-          "Range-Unit"?: parameters["rangeUnit"];
-          /** Preference */
-          Prefer?: parameters["preferCount"];
-        };
-      };
-      responses: {
-        /** OK */
-        200: {
-          schema: definitions["organizations"][];
-        };
-        /** Partial Content */
-        206: unknown;
-      };
-    };
-    post: {
-      parameters: {
-        body: {
-          /** organizations */
-          organizations?: definitions["organizations"];
-        };
-        query: {
-          /** Filtering Columns */
-          select?: parameters["select"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** Created */
-        201: unknown;
-      };
-    };
-    delete: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.organizations.id"];
-          created_at?: parameters["rowFilter.organizations.created_at"];
-          updated_at?: parameters["rowFilter.organizations.updated_at"];
-          name?: parameters["rowFilter.organizations.name"];
-          billing_country?: parameters["rowFilter.organizations.billing_country"];
-          billing_county?: parameters["rowFilter.organizations.billing_county"];
-          billing_city?: parameters["rowFilter.organizations.billing_city"];
-          billing_address?: parameters["rowFilter.organizations.billing_address"];
-          billing_zip?: parameters["rowFilter.organizations.billing_zip"];
-          service_id?: parameters["rowFilter.organizations.service_id"];
-          org_slug?: parameters["rowFilter.organizations.org_slug"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-    patch: {
-      parameters: {
-        query: {
-          id?: parameters["rowFilter.organizations.id"];
-          created_at?: parameters["rowFilter.organizations.created_at"];
-          updated_at?: parameters["rowFilter.organizations.updated_at"];
-          name?: parameters["rowFilter.organizations.name"];
-          billing_country?: parameters["rowFilter.organizations.billing_country"];
-          billing_county?: parameters["rowFilter.organizations.billing_county"];
-          billing_city?: parameters["rowFilter.organizations.billing_city"];
-          billing_address?: parameters["rowFilter.organizations.billing_address"];
-          billing_zip?: parameters["rowFilter.organizations.billing_zip"];
-          service_id?: parameters["rowFilter.organizations.service_id"];
-          org_slug?: parameters["rowFilter.organizations.org_slug"];
-        };
-        body: {
-          /** organizations */
-          organizations?: definitions["organizations"];
-        };
-        header: {
-          /** Preference */
-          Prefer?: parameters["preferReturn"];
-        };
-      };
-      responses: {
-        /** No Content */
-        204: never;
-      };
-    };
-  };
   "/customers": {
     get: {
       parameters: {
@@ -585,6 +471,7 @@ export interface paths {
           id?: parameters["rowFilter.customers.id"];
           created_at?: parameters["rowFilter.customers.created_at"];
           address_id?: parameters["rowFilter.customers.address_id"];
+          full_name?: parameters["rowFilter.customers.full_name"];
           /** Filtering Columns */
           select?: parameters["select"];
           /** Ordering */
@@ -643,6 +530,7 @@ export interface paths {
           id?: parameters["rowFilter.customers.id"];
           created_at?: parameters["rowFilter.customers.created_at"];
           address_id?: parameters["rowFilter.customers.address_id"];
+          full_name?: parameters["rowFilter.customers.full_name"];
         };
         header: {
           /** Preference */
@@ -665,6 +553,7 @@ export interface paths {
           id?: parameters["rowFilter.customers.id"];
           created_at?: parameters["rowFilter.customers.created_at"];
           address_id?: parameters["rowFilter.customers.address_id"];
+          full_name?: parameters["rowFilter.customers.full_name"];
         };
         body: {
           /** customers */
@@ -685,10 +574,10 @@ export interface paths {
     get: {
       parameters: {
         query: {
-          Country?: parameters["rowFilter.addresses.Country"];
-          Zip?: parameters["rowFilter.addresses.Zip"];
-          City?: parameters["rowFilter.addresses.City"];
-          Address?: parameters["rowFilter.addresses.Address"];
+          country?: parameters["rowFilter.addresses.country"];
+          zip?: parameters["rowFilter.addresses.zip"];
+          city?: parameters["rowFilter.addresses.city"];
+          street_address?: parameters["rowFilter.addresses.street_address"];
           id?: parameters["rowFilter.addresses.id"];
           created_at?: parameters["rowFilter.addresses.created_at"];
           /** Filtering Columns */
@@ -741,10 +630,10 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          Country?: parameters["rowFilter.addresses.Country"];
-          Zip?: parameters["rowFilter.addresses.Zip"];
-          City?: parameters["rowFilter.addresses.City"];
-          Address?: parameters["rowFilter.addresses.Address"];
+          country?: parameters["rowFilter.addresses.country"];
+          zip?: parameters["rowFilter.addresses.zip"];
+          city?: parameters["rowFilter.addresses.city"];
+          street_address?: parameters["rowFilter.addresses.street_address"];
           id?: parameters["rowFilter.addresses.id"];
           created_at?: parameters["rowFilter.addresses.created_at"];
         };
@@ -761,10 +650,10 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          Country?: parameters["rowFilter.addresses.Country"];
-          Zip?: parameters["rowFilter.addresses.Zip"];
-          City?: parameters["rowFilter.addresses.City"];
-          Address?: parameters["rowFilter.addresses.Address"];
+          country?: parameters["rowFilter.addresses.country"];
+          zip?: parameters["rowFilter.addresses.zip"];
+          city?: parameters["rowFilter.addresses.city"];
+          street_address?: parameters["rowFilter.addresses.street_address"];
           id?: parameters["rowFilter.addresses.id"];
           created_at?: parameters["rowFilter.addresses.created_at"];
         };
@@ -786,11 +675,12 @@ export interface paths {
 }
 
 export interface definitions {
-  subscriptions: {
+  bookings: {
     /**
      * Format: uuid
      * @description Note:
      * This is a Primary Key.<pk/>
+     * @default extensions.uuid_generate_v4()
      */
     id: string;
     /**
@@ -804,23 +694,27 @@ export interface definitions {
      */
     updated_at?: string;
     /** Format: timestamp with time zone */
-    paid_at?: string;
-    /** Format: text */
-    reference?: string;
-    /** Format: text */
-    type?: string;
+    starts_at?: string;
+    /** Format: timestamp with time zone */
+    ends_at?: string;
     /** Format: real */
     price?: number;
-    /** Format: text */
-    discount?: string;
-    /** Format: real */
-    discount_amount?: number;
     /**
      * Format: uuid
      * @description Note:
-     * This is a Foreign Key to `organizations.id`.<fk table='organizations' column='id'/>
+     * This is a Foreign Key to `services.id`.<fk table='services' column='id'/>
      */
-    organization_id?: string;
+    service_id?: string;
+    /**
+     * Format: uuid
+     * @description Note:
+     * This is a Foreign Key to `customers.id`.<fk table='customers' column='id'/>
+     */
+    customer_id?: string;
+    /** Format: timestamp with time zone */
+    "buffer_starts_at	"?: string;
+    /** Format: timestamp with time zone */
+    buffer_ends_at?: string;
   };
   services: {
     /**
@@ -841,7 +735,11 @@ export interface definitions {
      */
     updated_at?: string;
     /** Format: text */
-    name?: string;
+    slug?: string;
+    /** Format: text */
+    title?: string;
+    /** Format: integer */
+    duration?: number;
     /** Format: real */
     price?: number;
     /**
@@ -856,35 +754,30 @@ export interface definitions {
      * Format: uuid
      * @description Note:
      * This is a Primary Key.<pk/>
-     * @default extensions.uuid_generate_v4()
      */
     id: string;
-    /** Format: timestamp with time zone */
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at?: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
     updated_at?: string;
     /** Format: text */
-    avatar_url?: string;
+    full_name?: string;
     /** Format: text */
     first_name?: string;
     /** Format: text */
     last_name?: string;
     /** Format: text */
-    full_name?: string;
+    phone?: string;
     /** Format: text */
     email?: string;
     /** Format: text */
-    phone?: string;
-    /**
-     * Format: uuid
-     * @description Note:
-     * This is a Foreign Key to `organizations.id`.<fk table='organizations' column='id'/>
-     */
-    organization_id?: string;
-    /**
-     * Format: uuid
-     * @description Note:
-     * This is a Foreign Key to `services.id`.<fk table='services' column='id'/>
-     */
-    service_id?: string;
+    avatar_url?: string;
   };
   profiles: {
     /**
@@ -912,45 +805,6 @@ export interface definitions {
     email?: string;
     /** Format: text */
     phone?: string;
-  };
-  organizations: {
-    /**
-     * Format: uuid
-     * @description Note:
-     * This is a Primary Key.<pk/>
-     * @default extensions.uuid_generate_v4()
-     */
-    id: string;
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    created_at?: string;
-    /**
-     * Format: timestamp with time zone
-     * @default now()
-     */
-    updated_at?: string;
-    /** Format: text */
-    name?: string;
-    /** Format: text */
-    billing_country?: string;
-    /** Format: text */
-    billing_county?: string;
-    /** Format: text */
-    billing_city?: string;
-    /** Format: text */
-    billing_address?: string;
-    /** Format: text */
-    billing_zip?: string;
-    /**
-     * Format: uuid
-     * @description Note:
-     * This is a Foreign Key to `services.id`.<fk table='services' column='id'/>
-     */
-    service_id?: string;
-    /** Format: text */
-    org_slug?: string;
   };
   customers: {
     /** Format: text */
@@ -981,16 +835,21 @@ export interface definitions {
      * This is a Foreign Key to `addresses.id`.<fk table='addresses' column='id'/>
      */
     address_id?: string;
+    /**
+     * Format: text
+     * @default
+     */
+    full_name?: string;
   };
   addresses: {
     /** Format: text */
-    Country?: string;
+    country?: string;
     /** Format: bigint */
-    Zip?: number;
+    zip?: number;
     /** Format: text */
-    City?: string;
+    city?: string;
     /** Format: text */
-    Address?: string;
+    street_address?: string;
     /**
      * Format: uuid
      * @description Note:
@@ -1039,28 +898,28 @@ export interface parameters {
   offset: string;
   /** @description Limiting and Pagination */
   limit: string;
-  /** @description subscriptions */
-  "body.subscriptions": definitions["subscriptions"];
+  /** @description bookings */
+  "body.bookings": definitions["bookings"];
   /** Format: uuid */
-  "rowFilter.subscriptions.id": string;
+  "rowFilter.bookings.id": string;
   /** Format: timestamp with time zone */
-  "rowFilter.subscriptions.created_at": string;
+  "rowFilter.bookings.created_at": string;
   /** Format: timestamp with time zone */
-  "rowFilter.subscriptions.updated_at": string;
+  "rowFilter.bookings.updated_at": string;
   /** Format: timestamp with time zone */
-  "rowFilter.subscriptions.paid_at": string;
-  /** Format: text */
-  "rowFilter.subscriptions.reference": string;
-  /** Format: text */
-  "rowFilter.subscriptions.type": string;
+  "rowFilter.bookings.starts_at": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.bookings.ends_at": string;
   /** Format: real */
-  "rowFilter.subscriptions.price": string;
-  /** Format: text */
-  "rowFilter.subscriptions.discount": string;
-  /** Format: real */
-  "rowFilter.subscriptions.discount_amount": string;
+  "rowFilter.bookings.price": string;
   /** Format: uuid */
-  "rowFilter.subscriptions.organization_id": string;
+  "rowFilter.bookings.service_id": string;
+  /** Format: uuid */
+  "rowFilter.bookings.customer_id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.bookings.buffer_starts_at	": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.bookings.buffer_ends_at": string;
   /** @description services */
   "body.services": definitions["services"];
   /** Format: uuid */
@@ -1070,7 +929,11 @@ export interface parameters {
   /** Format: timestamp with time zone */
   "rowFilter.services.updated_at": string;
   /** Format: text */
-  "rowFilter.services.name": string;
+  "rowFilter.services.slug": string;
+  /** Format: text */
+  "rowFilter.services.title": string;
+  /** Format: integer */
+  "rowFilter.services.duration": string;
   /** Format: real */
   "rowFilter.services.price": string;
   /** Format: uuid */
@@ -1080,23 +943,21 @@ export interface parameters {
   /** Format: uuid */
   "rowFilter.providers.id": string;
   /** Format: timestamp with time zone */
+  "rowFilter.providers.created_at": string;
+  /** Format: timestamp with time zone */
   "rowFilter.providers.updated_at": string;
   /** Format: text */
-  "rowFilter.providers.avatar_url": string;
+  "rowFilter.providers.full_name": string;
   /** Format: text */
   "rowFilter.providers.first_name": string;
   /** Format: text */
   "rowFilter.providers.last_name": string;
   /** Format: text */
-  "rowFilter.providers.full_name": string;
+  "rowFilter.providers.phone": string;
   /** Format: text */
   "rowFilter.providers.email": string;
   /** Format: text */
-  "rowFilter.providers.phone": string;
-  /** Format: uuid */
-  "rowFilter.providers.organization_id": string;
-  /** Format: uuid */
-  "rowFilter.providers.service_id": string;
+  "rowFilter.providers.avatar_url": string;
   /** @description profiles */
   "body.profiles": definitions["profiles"];
   /** Format: uuid */
@@ -1119,30 +980,6 @@ export interface parameters {
   "rowFilter.profiles.email": string;
   /** Format: text */
   "rowFilter.profiles.phone": string;
-  /** @description organizations */
-  "body.organizations": definitions["organizations"];
-  /** Format: uuid */
-  "rowFilter.organizations.id": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.organizations.created_at": string;
-  /** Format: timestamp with time zone */
-  "rowFilter.organizations.updated_at": string;
-  /** Format: text */
-  "rowFilter.organizations.name": string;
-  /** Format: text */
-  "rowFilter.organizations.billing_country": string;
-  /** Format: text */
-  "rowFilter.organizations.billing_county": string;
-  /** Format: text */
-  "rowFilter.organizations.billing_city": string;
-  /** Format: text */
-  "rowFilter.organizations.billing_address": string;
-  /** Format: text */
-  "rowFilter.organizations.billing_zip": string;
-  /** Format: uuid */
-  "rowFilter.organizations.service_id": string;
-  /** Format: text */
-  "rowFilter.organizations.org_slug": string;
   /** @description customers */
   "body.customers": definitions["customers"];
   /** Format: text */
@@ -1161,16 +998,18 @@ export interface parameters {
   "rowFilter.customers.created_at": string;
   /** Format: uuid */
   "rowFilter.customers.address_id": string;
+  /** Format: text */
+  "rowFilter.customers.full_name": string;
   /** @description addresses */
   "body.addresses": definitions["addresses"];
   /** Format: text */
-  "rowFilter.addresses.Country": string;
+  "rowFilter.addresses.country": string;
   /** Format: bigint */
-  "rowFilter.addresses.Zip": string;
+  "rowFilter.addresses.zip": string;
   /** Format: text */
-  "rowFilter.addresses.City": string;
+  "rowFilter.addresses.city": string;
   /** Format: text */
-  "rowFilter.addresses.Address": string;
+  "rowFilter.addresses.street_address": string;
   /** Format: uuid */
   "rowFilter.addresses.id": string;
   /** Format: timestamp with time zone */

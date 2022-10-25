@@ -25,8 +25,8 @@ export default function SidebarMenu() {
       icon: <ChartPieIcon className="h-6 w-6" />,
     },
     {
-      title: 'Calendar',
-      slug: 'calendar',
+      title: 'Bookings',
+      slug: 'bookings',
       icon: <CalendarDaysIcon className="h-6 w-6" />,
     },
     {
