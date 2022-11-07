@@ -10,7 +10,7 @@ import { useSession } from '../../../utils/hooks/useSession'
 import DashboardLayout from '../../../components/layout/DashboardLayout'
 import { useRouter } from 'next/router'
 
-export default function AddCustomer() {
+export default function EditCustomer() {
   const { session } = useSession()
   const {
     register,
@@ -121,7 +121,7 @@ export default function AddCustomer() {
             <Link href="/dashboard/customers">
               <div className="ml-auto inline-flex cursor-pointer items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900">
                 <ArrowLongLeftIcon className="mr-3 h-6 w-6" />
-                <span className="font-medium">Vissza</span>
+                <span className="font-medium">Back</span>
               </div>
             </Link>
           </div>

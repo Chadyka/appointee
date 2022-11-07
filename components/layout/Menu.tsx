@@ -13,8 +13,8 @@ export function Menu({ session }: Props) {
       {session ? (
         <>
           <li>
-            <Link href="/profile">
-              <a className="btn-link">My profile</a>
+            <Link href="/dashboard/profile">
+              <a className="btn-link duration-300">My profile</a>
             </Link>
           </li>
           <li>

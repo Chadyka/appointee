@@ -59,18 +59,22 @@ export function EditAvatar({ url, onUpload }: Props) {
   }
 
   return (
-    <div>
+    <div className="flex items-center">
       {avatarUrl ? (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={avatarUrl}
           alt="Avatar"
-          className="w-16 h-16 rounded-full border object-cover"
+          className="h-32 w-32 rounded-full border object-cover"
         />
       ) : (
-        <div className="w-16 h-16 border rounded-full" />
+        <div className="h-16 w-16 rounded-full border" />
       )}
       <div>
-        <label className="btn-link" htmlFor="single">
+        <label
+          className="ml-12 cursor-pointer rounded-full border-2 border-zinc-800 bg-zinc-800 px-8 py-3 font-medium text-zinc-50 duration-300 hover:bg-zinc-50 hover:text-zinc-800"
+          htmlFor="single"
+        >
           {uploading ? 'Uploading…' : 'Change'}
         </label>
         <input

@@ -13,8 +13,8 @@ export function Navbar({ session }: Props) {
       {session ? (
         <>
           <li>
-            <Link href="/profile">
-              <a className="btn-secondary">My profile</a>
+            <Link href="/dashboard/profile">
+              <a className="btn-secondary duration-300">My profile</a>
             </Link>
           </li>
           <li>
@@ -33,7 +33,14 @@ export function Navbar({ session }: Props) {
         <>
           <li>
             <Link href="/signin">
-              <a className="btn-link">Sign in/Sign up</a>
+              <a className="btn-secondary">Sign up</a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/signin">
+              <a className="text-zinc-50 underline underline-offset-4">
+                Sign in
+              </a>
             </Link>
           </li>
         </>

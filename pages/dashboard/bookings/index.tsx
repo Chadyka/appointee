@@ -93,7 +93,6 @@ export default function Bookings() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          /
           {/* <CustomerTable customers={customers} setCustomers={setCustomers} /> */}
           <Table
             headers={[
@@ -105,6 +104,7 @@ export default function Bookings() {
               'Price',
             ]}
             rows={bookingsToRows(bookings)}
+            resourceUrl="bookings"
             // deleteRow={deleteCustomer}
           />
         </Transition>

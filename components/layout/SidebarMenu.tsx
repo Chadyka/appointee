@@ -19,11 +19,11 @@ export default function SidebarMenu() {
       slug: '',
       icon: <HomeIcon className="h-6 w-6" />,
     },
-    {
-      title: 'Analytics',
-      slug: 'analytics',
-      icon: <ChartPieIcon className="h-6 w-6" />,
-    },
+    // {
+    //   title: 'Analytics',
+    //   slug: 'analytics',
+    //   icon: <ChartPieIcon className="h-6 w-6" />,
+    // },
     {
       title: 'Bookings',
       slug: 'bookings',
@@ -39,11 +39,11 @@ export default function SidebarMenu() {
       slug: 'services',
       icon: <ShareIcon className="h-6 w-6" />,
     },
-    {
-      title: 'Settings',
-      slug: 'settings',
-      icon: <Cog6ToothIcon className="h-6 w-6" />,
-    },
+    // {
+    //   title: 'Settings',
+    //   slug: 'settings',
+    //   icon: <Cog6ToothIcon className="h-6 w-6" />,
+    // },
   ]
 
   return (

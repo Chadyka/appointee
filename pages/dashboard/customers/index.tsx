@@ -124,6 +124,7 @@ export default function Customers() {
               'country_code',
             ])}
             deleteRow={deleteCustomer}
+            resourceUrl="customers"
           />
         </Transition>
       </div>

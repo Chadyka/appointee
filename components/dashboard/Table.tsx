@@ -5,9 +5,11 @@ export default function CustomerTable({
   headers,
   rows,
   deleteRow,
+  resourceUrl,
 }: {
   headers: string[]
   rows: Array<any[]>
+  resourceUrl: string
   deleteRow?(id: string): Promise<void>
 }) {
   return (
@@ -43,7 +45,7 @@ export default function CustomerTable({
 
               <td>
                 <div className="flex h-full items-center justify-center gap-x-4">
-                  <Link href={`/dashboard/customers/${row[0]}`}>
+                  <Link href={`/dashboard/${resourceUrl}/${row[0]}`}>
                     <PencilIcon className="h-5 w-5 cursor-pointer text-sky-700 hover:text-sky-600" />
                   </Link>
                   {deleteRow && (

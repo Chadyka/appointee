@@ -91,7 +91,6 @@ export default function Services() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          {/* <CustomerTable customers={customers} setCustomers={setCustomers} /> */}
           <Table
             headers={['Title', 'Duration', 'Price']}
             rows={getTableRows(services, [
@@ -101,6 +100,7 @@ export default function Services() {
               'duration',
               'price',
             ])}
+            resourceUrl="services"
             // deleteRow={deleteCustomer}
           />
         </Transition>
