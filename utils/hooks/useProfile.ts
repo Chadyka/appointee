@@ -1,6 +1,5 @@
 import { AuthSession } from '@supabase/supabase-js'
 import { useEffect, useState } from 'react'
-import { definitions } from '../../types/database/index'
 import { supabase } from '../supabaseClient'
 import { db } from './db'
 
@@ -8,6 +7,7 @@ export interface Profile {
   username: string
   website: string
   avatarUrl: string
+  first_name: string
 }
 
 export function useProfile(session: AuthSession) {
@@ -26,7 +26,7 @@ export function useProfile(session: AuthSession) {
         if (user) {
           const { data, error, status } = await db
             .profiles()
-            .select(`username, website, avatar_url`)
+            .select(`username, website, avatar_url, first_name`)
             .eq('id', user.id)
             .single()
 
@@ -39,6 +39,7 @@ export function useProfile(session: AuthSession) {
               username: data.username ?? '',
               website: data.website ?? '',
               avatarUrl: data.avatar_url ?? '',
+              first_name: data.first_name ?? '',
             })
           }
         }

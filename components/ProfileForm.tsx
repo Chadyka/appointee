@@ -2,7 +2,7 @@ import { ArrowLongLeftIcon } from '@heroicons/react/24/solid'
 import { AuthSession } from '@supabase/supabase-js'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { db } from '../utils/hooks/db'
+
 import { useProfile } from '../utils/hooks/useProfile'
 import { supabase } from '../utils/supabaseClient'
 import { EditAvatar } from './EditAvatar'
