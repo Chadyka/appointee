@@ -19,12 +19,6 @@ import Router from 'next/router'
 export default function Dashboard() {
   const { session } = useSession()
 
-  useEffect(() => {
-    if (!session) {
-      Router.push('/')
-    }
-  }, [session])
-
   const { loading, error, profile } = useProfile(session)
   const [avatar_url, setAvatarUrl] = useState<string>('')
   const [loadingFetch, setLoadingFetch] = useState(false)
