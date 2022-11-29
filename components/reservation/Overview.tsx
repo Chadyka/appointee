@@ -35,7 +35,7 @@ export default function Overview({
             <div className="col-span-6 flex w-full justify-between">
               <div className="flex flex-col font-medium">
                 <span>Duration:</span>
-                <span>{service?.duration}</span>
+                <span>{service?.duration} minutes</span>
               </div>
               <div className="flex flex-col font-medium ">
                 <span>Price:</span>
