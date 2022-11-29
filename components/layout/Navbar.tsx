@@ -10,7 +10,7 @@ export interface Props {
 export function Navbar({ session }: Props) {
   return (
     <ul className="flex items-center justify-center space-x-6">
-      {session ? (
+      {session && (
         <>
           <li>
             <Link href="/dashboard/profile">
@@ -27,21 +27,6 @@ export function Navbar({ session }: Props) {
             >
               Logout
             </button>
-          </li>
-        </>
-      ) : (
-        <>
-          <li>
-            <Link href="/signin">
-              <a className="btn-secondary">Sign up</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/signin">
-              <a className="text-zinc-50 underline underline-offset-4">
-                Sign in
-              </a>
-            </Link>
           </li>
         </>
       )}

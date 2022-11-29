@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import { Control, useController, UseFormSetValue } from 'react-hook-form'
+import { NewReservationInput } from '../../pages/book/[slug]'
 import { Service } from '../../types/database/types'
-import { NewReservationInput } from '../../types/Onboarding'
 
 export default function BookingForm({
   service,

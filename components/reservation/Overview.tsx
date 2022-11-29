@@ -1,7 +1,7 @@
 import { CheckCircleIcon } from '@heroicons/react/24/solid'
 import { format } from 'date-fns'
+import { NewReservationInput } from '../../pages/book/[slug]'
 import { Service } from '../../types/database/types'
-import { NewReservationInput } from '../../types/Onboarding'
 
 export default function Overview({
   formValues,

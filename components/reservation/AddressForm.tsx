@@ -1,5 +1,5 @@
 import { FieldErrorsImpl, UseFormRegister } from 'react-hook-form'
-import { NewReservationInput } from '../../types/Onboarding'
+import { NewReservationInput } from '../../pages/book/[slug]'
 
 export default function AddressForm({
   register,

@@ -10,7 +10,7 @@ export interface Props {
 export function Menu({ session }: Props) {
   return (
     <ul className="flex space-x-4">
-      {session ? (
+      {session && (
         <>
           <li>
             <Link href="/dashboard/profile">
@@ -27,14 +27,6 @@ export function Menu({ session }: Props) {
             >
               Sign out
             </button>
-          </li>
-        </>
-      ) : (
-        <>
-          <li>
-            <Link href="/signin">
-              <a className="btn-link">Sign in/Sign up</a>
-            </Link>
           </li>
         </>
       )}
