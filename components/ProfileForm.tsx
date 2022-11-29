@@ -122,7 +122,7 @@ export function ProfileForm({ session }: Props) {
           <div className="col-span-6 sm:col-span-3">
             <label className="label" htmlFor="website">
               <Link href={`/book/${website}`}>
-                <span>
+                <span className="flex cursor-pointer gap-x-3">
                   Website <ArrowTopRightOnSquareIcon className="h-6 w-6" />
                 </span>
               </Link>
