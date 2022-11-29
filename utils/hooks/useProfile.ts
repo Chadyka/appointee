@@ -10,7 +10,7 @@ export interface Profile {
   first_name: string
 }
 
-export function useProfile(session: AuthSession) {
+export function useProfile(session: AuthSession | null) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<any | null>(null)
   const [profile, setProfile] = useState<Profile | null>(null)
