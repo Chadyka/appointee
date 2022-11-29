@@ -98,10 +98,9 @@ export default function Dashboard() {
     }
   }
 
-  const futureBookings = bookings.filter((booking) =>
-    compareDesc(today, new Date(booking.starts_at!))
+  const futureBookings = bookings.filter(
+    (booking) => compareDesc(today, new Date(booking.starts_at!)) === 1
   )
-
   return (
     <DashboardLayout session={session}>
       <div className="grid w-full grid-cols-3 gap-12 rounded-xl border-4 border-zinc-400 p-6">
@@ -157,6 +156,7 @@ export default function Dashboard() {
                 .toLocaleString('hu-HU', {
                   style: 'currency',
                   currency: 'HUF',
+                  maximumFractionDigits: 0,
                 })}
             </h3>
           </div>
