@@ -13,6 +13,7 @@ import { useSession } from '../../utils/hooks/useSession'
 import { supabase } from '../../utils/supabaseClient'
 import { addDays, format, isSameDay } from 'date-fns'
 import { Analytics } from '../../components/dashboard/Chart'
+import { compareDesc } from 'date-fns'
 
 export default function Dashboard() {
   const { session } = useSession()
@@ -97,6 +98,10 @@ export default function Dashboard() {
     }
   }
 
+  const futureBookings = bookings.filter((booking) =>
+    compareDesc(today, new Date(booking.starts_at!))
+  )
+
   return (
     <DashboardLayout session={session}>
       <div className="grid w-full grid-cols-3 gap-12 rounded-xl border-4 border-zinc-400 p-6">
@@ -121,9 +126,7 @@ export default function Dashboard() {
         <div className="flex w-full items-center rounded-lg bg-zinc-50 p-6">
           <UsersIcon className="h-10 w-10 text-zinc-700" />
           <div className="ml-6 flex flex-col">
-            <label className="font-medium text-zinc-500">
-              Recent customers
-            </label>
+            <label className="font-medium text-zinc-500">Customers</label>
             <h3 className="text-xl font-bold">{customers?.length}</h3>
           </div>
         </div>
@@ -133,7 +136,7 @@ export default function Dashboard() {
             <label className="font-medium text-zinc-500">
               Upcoming bookings
             </label>
-            <h3 className="text-xl font-bold">{bookings?.length}</h3>
+            <h3 className="text-xl font-bold">{futureBookings?.length}</h3>
           </div>
         </div>
         <div className="flex w-full items-center rounded-lg bg-zinc-50 p-6">
@@ -143,7 +146,7 @@ export default function Dashboard() {
               Upcoming revenue
             </label>
             <h3 className="text-xl font-bold">
-              {bookings
+              {futureBookings
                 ?.reduce((accumulator, booking) => {
                   if (booking.price) {
                     return accumulator + booking.price
