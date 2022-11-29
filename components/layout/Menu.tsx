@@ -1,7 +1,6 @@
 import { AuthSession } from '@supabase/supabase-js'
 import Link from 'next/link'
 import Router from 'next/router'
-import { useEffect } from 'react'
 import { supabase } from '../../utils/supabaseClient'
 
 export interface Props {
@@ -23,6 +22,7 @@ export function Menu({ session }: Props) {
               className="btn-link"
               onClick={() => {
                 supabase.auth.signOut()
+                Router.push('/')
               }}
             >
               Sign out

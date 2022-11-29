@@ -5,16 +5,14 @@ import {
   UsersIcon,
 } from '@heroicons/react/24/solid'
 import { useEffect, useState } from 'react'
-
 import DashboardLayout from '../../components/layout/DashboardLayout'
 import { Booking, Customer } from '../../types/database/types'
 import { db } from '../../utils/hooks/db'
 import { useProfile } from '../../utils/hooks/useProfile'
 import { useSession } from '../../utils/hooks/useSession'
 import { supabase } from '../../utils/supabaseClient'
-import { addDays, differenceInDays, format, isSameDay } from 'date-fns'
+import { addDays, format, isSameDay } from 'date-fns'
 import { Analytics } from '../../components/dashboard/Chart'
-import Router from 'next/router'
 
 export default function Dashboard() {
   const { session } = useSession()
