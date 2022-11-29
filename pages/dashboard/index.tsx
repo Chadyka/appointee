@@ -14,9 +14,16 @@ import { useSession } from '../../utils/hooks/useSession'
 import { supabase } from '../../utils/supabaseClient'
 import { addDays, differenceInDays, format, isSameDay } from 'date-fns'
 import { Analytics } from '../../components/dashboard/Chart'
+import Router from 'next/router'
 
 export default function Dashboard() {
   const { session } = useSession()
+
+  useEffect(() => {
+    if (!session) {
+      Router.push('/')
+    }
+  }, [session])
 
   const { loading, error, profile } = useProfile(session)
   const [avatar_url, setAvatarUrl] = useState<string>('')

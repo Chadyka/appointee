@@ -10,30 +10,26 @@ export function SigninForm() {
   const [emailSent, setEmailSent] = useState(false)
 
   const handleLogin = async (
-    loginProvider: 'OTP' | 'EMAIL' | 'GOOGLE',
-    email: string
+    loginProvider: 'OTP' | 'GITHUB' | 'GOOGLE',
+    email?: string
   ) => {
     try {
       switch (loginProvider) {
         case 'OTP':
-          const { error } = await supabase.auth.signInWithOtp({ email })
-          if (error) throw error
-          setEmailSent(true)
+          if (email) {
+            const { error } = await supabase.auth.signInWithOtp({ email })
+            if (error) throw error
+            setEmailSent(true)
+          }
           break
-        // case "EMAIL":
-        // const { data, error } = await supabase.auth.signUp({
-        //   email: "example@email.com",
-        //   password: "example-password",
-        // });
-        // break;
-        // case "GOOGLE":
-        // const { data, error } = await supabase.auth.signInWithOAuth({
-        //   provider: "google",
-        // });
-        // break;
-        default:
+        case 'GOOGLE':
+          const { error: googleError } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+          })
+          if (googleError) throw googleError
           break
       }
+
       setLoading(true)
     } catch (error: any) {
       console.error(error.error_description || error.message)
@@ -96,6 +92,7 @@ export function SigninForm() {
               <span className="mb-6 h-0.5 w-3/4 bg-zinc-300"></span>
               <button
                 type="button"
+                onClick={() => handleLogin('GOOGLE')}
                 className="flex w-full justify-center gap-x-3 rounded-lg bg-red-500 py-2 font-medium text-zinc-50"
               >
                 Sign in with Google
@@ -122,88 +119,9 @@ export function SigninForm() {
                   ></path>
                 </svg>
               </button>
-              <button
-                type="button"
-                className="flex w-full justify-center gap-x-3 rounded-lg bg-zinc-800 py-2 font-medium text-zinc-50"
-              >
-                Sign in with Github
-                <svg
-                  width="24px"
-                  height="24px"
-                  strokeWidth="1.5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  color="#FAFAFA"
-                >
-                  <path
-                    d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
-                    stroke="#FAFAFA"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></path>
-                  <path
-                    d="M14.333 19v-1.863c.025-.31-.018-.62-.126-.913a2.18 2.18 0 00-.5-.781c2.093-.227 4.293-1 4.293-4.544 0-.906-.358-1.778-1-2.434a3.211 3.211 0 00-.06-2.448s-.787-.227-2.607.961a9.152 9.152 0 00-4.666 0c-1.82-1.188-2.607-.96-2.607-.96A3.211 3.211 0 007 8.464a3.482 3.482 0 00-1 2.453c0 3.519 2.2 4.291 4.293 4.544a2.18 2.18 0 00-.496.773 2.134 2.134 0 00-.13.902V19M9.667 17.702c-2 .631-3.667 0-4.667-1.948"
-                    stroke="#FAFAFA"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  ></path>
-                </svg>
-              </button>
             </div>
           </div>
         )}
-        {/* <div>
-            <label
-              htmlFor="password"
-              className="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Your password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="••••••••"
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-500 dark:bg-gray-600 dark:text-white dark:placeholder-gray-400"
-            />
-          </div> */}
-        {/* <div className="flex items-start">
-            <div className="flex items-start">
-              <div className="flex h-5 items-center">
-                <input
-                  id="remember"
-                  type="checkbox"
-                  value=""
-                  className="focus:ring-3 h-4 w-4 rounded border border-gray-300 bg-gray-50 focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                />
-              </div>
-              <label
-                htmlFor="remember"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Remember me
-              </label>
-            </div>
-            <a
-              href="#"
-              className="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
-            >
-              Lost Password?
-            </a>
-          </div> */}
-
-        {/* <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-            Not registered?{' '}
-            <a
-              href="#"
-              className="text-zinc-700 hover:underline dark:text-zinc-500"
-            >
-              Create account
-            </a>
-          </div> */}
       </form>
     </div>
   )
