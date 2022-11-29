@@ -119,7 +119,9 @@ export function ProfileForm({ session }: Props) {
           <div className="col-span-6 sm:col-span-3">
             <label className="label" htmlFor="website">
               <Link href={`/book/${website}`}>
-                Website <ShareIcon className="h-6 w-6" />
+                <>
+                  Website <ShareIcon className="h-6 w-6" />
+                </>
               </Link>
             </label>
             <input
