@@ -1,4 +1,4 @@
-import { ArrowLongLeftIcon } from '@heroicons/react/24/solid'
+import { ArrowLongLeftIcon, ShareIcon } from '@heroicons/react/24/solid'
 import { AuthSession } from '@supabase/supabase-js'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
@@ -118,7 +118,9 @@ export function ProfileForm({ session }: Props) {
           </div>
           <div className="col-span-6 sm:col-span-3">
             <label className="label" htmlFor="website">
-              Website
+              <Link href={`/book/${website}`}>
+                Website <ShareIcon className="h-6 w-6" />
+              </Link>
             </label>
             <input
               className="block w-full rounded-lg border bg-gray-50 p-2.5 text-gray-900 shadow-sm focus:border-sky-600 focus:ring-sky-600 sm:text-sm"
